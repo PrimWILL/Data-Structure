@@ -45,18 +45,15 @@ element peek(StackType* s) {
     else return s->data[s->top];
 }
 
-void big2little(StackType* s1, StackType* s2, char in[]) {
+void big2little(StackType* s1, char in[]) {
     int len = strlen(in);
     init_stack(s1);
-    init_stack(s2);
     for (int i = 0; i < len; i++) {
         if (in[i] >= 'A' && in[i] <= 'Z'){
             push(s1, in[i]-'A'+'a');
-            push(s2, in[i]-'A'+'a');
         }
         else if (in[i] >= 'a' && in[i] <= 'z') {
             push(s1, in[i]);
-            push(s2, in[i]);
         }
     }
 }
@@ -66,20 +63,25 @@ int main(void) {
     printf("Please enter the string: ");
     scanf("%[^\n]s", ch);
 
-    StackType stack1, stack2, stack3;
-    big2little(&stack1, &stack2, ch);
+    StackType stack1;
+    big2little(&stack1, ch);
+    int len = strlen(ch);
     
-    init_stack(&stack3);
-    while(!is_empty(&stack1)) {
-        push(&stack3, pop(&stack1));
-    }
-    while(!is_empty(&stack3)) {
-        //printf("%c %c\n", peek(&stack3), peek(&stack2));
-        if (pop(&stack3) != pop(&stack2)) {
-            printf("It's not a palindrome.\n");
-            return;
+    for(int i = 0; i < len; i++) {
+        if (ch[i] >= 'A' && ch[i] <= 'Z') {
+            if((ch[i]-'A'+'a') != pop(&stack1)) {
+                printf("It's not a palindrome\n");
+                return;
+            }
+        }
+        else if (ch[i] >= 'a' && ch[i] <= 'z') {
+            if(ch[i] != pop(&stack1)) {
+                printf("It's not a palindrome\n");
+                return;
+            }
         }
     }
+
     printf("It's palindrome\n");
     return 0;
 }
