@@ -26,10 +26,36 @@ void print_dlist(DListNode* phead)
 void dinsert(DListNode* before, element data)
 {
     DListNode* newnode = (DListNode*)malloc(sizeof(DListNode));
-    strcpy(newnode->data, data);
+    newnode->data = data;
     newnode->llink = before;
     newnode->rlink = before->rlink;
     before->rlink->llink = newnode;
     before->rlink = newnode;
+}
+
+void ddelete(DListNode* head, DListNode* removed)
+{
+    if (removed == head) return;
+    removed->llink->rlink = removed->rlink;
+    removed->rlink->llink = removed->llink;
+    free(removed);
+}
+
+int main(void)
+{
+    DListNode* head = (DListNode*)malloc(sizeof(DListNode));
+    init(head);
+    printf("Step 1: Add\n");
+    for (int i = 0; i < 5; i++) {
+        dinsert(head, i);
+        print_dlist(head);
+    }
+    printf("\nStep 2: Delete\n");
+    for (int i = 0; i < 5; i++) {
+        print_dlist(head);
+        ddelete(head, head->rlink);
+    }
+    free(head);
+    return 0;
 }
 
