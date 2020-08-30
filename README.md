@@ -1,5 +1,5 @@
 # Data-Structure
-> <i>Try not to become a man of success. Rather become a man of value. - <b>Albert Einstein</i>
+> <i>Try not to become a man of success. Rather become a man of value. - <b>Albert Einstein</i></b>
 - <b>『C언어로 쉽게 풀어 쓴 자료구조』</b> - <i>천인국, 공용해, 하상호</i> 를 읽으면서 기록하는 자료구조
 - 주로 소스 코드 위주로 올려요🐣  
 ***
